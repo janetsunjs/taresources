@@ -1,0 +1,410 @@
+/* =========
+   Global Theme + Full-Screen Background + Consistent Layout
+   Paste entire file into src/App.css
+   ========= */
+
+:root {
+  /* Chalkboard (navy) */
+  --board-1: #071427;
+  --board-2: #0a1e3b;
+
+  /* Chalk */
+  --chalk-white: rgba(255, 255, 255, 0.92);
+  --chalk-yellow: rgba(255, 230, 138, 0.92);
+  --chalk-dust: rgba(255, 255, 255, 0.08);
+
+  /* Paper card */
+  --paper: rgba(255, 255, 255, 0.92);
+  --paper-border: rgba(0, 0, 0, 0.06);
+  --shadow: rgba(0, 0, 0, 0.28);
+
+  /* Text on paper */
+  --text-main: #101826;
+  --text-muted: #4f5b6a;
+
+  /* Sticky notes (pastels) */
+  --note-yellow: #ffe68a;
+  --note-mint: #b8f2e6;
+  --note-lilac: #d9c7ff;
+  --note-pink: #ffc1d6;
+
+  /* Primary button */
+  --primary: #0ea5e9;
+  --primary-dark: #0284c7;
+  --ring: rgba(14, 165, 233, 0.28);
+}
+
+/* --- Reliable full-screen base --- */
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: var(--text-main);
+}
+
+/* --- Full-screen chalkboard background (applies to EVERY page) --- */
+.page {
+  min-height: 100vh; /* true full screen */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+
+  /* Layers:
+     1) pastel “sticky notes”
+     2) chalk smudges
+     3) chalk dust speckles
+     4) navy board gradient
+  */
+  background:
+    /* Sticky notes (pastel cards) */
+    linear-gradient(0deg, rgba(255, 230, 138, 0.18), rgba(255, 230, 138, 0.18)) 10% 18% / 160px 110px no-repeat,
+    linear-gradient(0deg, rgba(185, 242, 230, 0.16), rgba(185, 242, 230, 0.16)) 86% 22% / 170px 120px no-repeat,
+    linear-gradient(0deg, rgba(217, 199, 255, 0.16), rgba(217, 199, 255, 0.16)) 18% 84% / 180px 120px no-repeat,
+    linear-gradient(0deg, rgba(255, 193, 214, 0.14), rgba(255, 193, 214, 0.14)) 84% 78% / 150px 110px no-repeat,
+
+    /* Chalk smudges */
+    radial-gradient(900px 520px at 30% 30%, rgba(255, 255, 255, 0.10), transparent 62%),
+    radial-gradient(900px 520px at 70% 70%, rgba(255, 255, 255, 0.08), transparent 62%),
+
+    /* Chalk dust speckles */
+    repeating-radial-gradient(circle at 22% 28%,
+      var(--chalk-dust) 0 1px,
+      transparent 1px 12px
+    ),
+
+    /* Base board */
+    linear-gradient(180deg, var(--board-2), var(--board-1));
+}
+
+/* --- Consistent “paper on board” card --- */
+.card {
+  width: min(800px, 100%);
+  padding: 34px 32px;
+  border-radius: 26px;
+  background: var(--paper);
+  border: 1px solid var(--paper-border);
+  box-shadow: 0 26px 80px var(--shadow);
+  text-align: center;
+}
+
+/* --- Consistent “paper on board” card --- */
+.cardwide {
+  width: min(980px, 100%);
+  padding: 34px 32px;
+  border-radius: 26px;
+  background: var(--paper);
+  border: 1px solid var(--paper-border);
+  box-shadow: 0 26px 80px var(--shadow);
+  text-align: center;
+}
+/* --- Badge, title, subtitle --- */
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(7, 20, 39, 0.90);
+  color: var(--chalk-white);
+  box-shadow: 0 10px 20px rgba(7, 20, 39, 0.20);
+  margin-bottom: 14px;
+}
+
+.title {
+  font-size: 42px;
+  line-height: 1.1;
+  margin: 0 0 12px;
+}
+
+.subtitle {
+  margin: 0 0 18px;
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* --- Content formatting (for your scenario intro text) --- */
+.content {
+  text-align: left;
+  margin-top: 18px;
+}
+
+.content p {
+  margin: 0 0 14px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-main);
+}
+
+.content em {
+  font-style: normal;
+  color: var(--text-muted);
+}
+
+.callout {
+  margin: 18px 0 22px;
+  padding: 14px 16px;
+  border-left: 4px solid var(--primary);
+  background: rgba(14, 165, 233, 0.08);
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+/* --- Main buttons --- */
+.button {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 16px;
+  border-radius: 16px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 14px 34px var(--ring);
+  transition: transform 120ms ease, background 120ms ease, filter 120ms ease;
+}
+
+.button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  filter: brightness(0.99);
+}
+
+.button:active {
+  transform: translateY(0px) scale(0.99);
+}
+
+.button.secondary {
+  background: transparent;
+  color: var(--primary-dark);
+  border: 2px solid var(--primary);
+  box-shadow: none;
+}
+
+.button.secondary:hover {
+  background: rgba(14, 165, 233, 0.08);
+}
+
+/* --- Chips (sticky note buttons) --- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px 0 24px;
+}
+
+/* Reset button defaults so no weird white blocks */
+.chip {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 8px 10px;
+  border-radius: 12px;
+
+  background: none;
+  background-clip: padding-box;
+
+  font: inherit;
+  color: inherit;
+  line-height: 1;
+
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+}
+
+.chip.yellow { background: rgba(255, 230, 138, 0.55); }
+.chip.mint   { background: rgba(185, 242, 230, 0.55); }
+.chip.lilac  { background: rgba(217, 199, 255, 0.55); }
+.chip.pink   { background: rgba(255, 193, 214, 0.55); }
+
+.chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  filter: brightness(0.98);
+}
+
+.chip:active {
+  transform: translateY(0px) scale(0.98);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.chip:focus-visible {
+  outline: 3px solid rgba(14, 165, 233, 0.28);
+  outline-offset: 2px;
+}
+
+/* --- Scenario cards (if you use them) --- */
+.grid {
+  display: grid;
+  gap: 14px;
+  margin: 18px 0 18px;
+}
+
+@media (min-width: 720px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.scenarioCard {
+  text-align: left;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.85);
+  border-radius: 18px;
+  padding: 14px 14px 12px;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+
+.scenarioCard:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0,0,0,0.12);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.10);
+}
+
+.scenarioTitle {
+  font-weight: 800;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.scenarioBlurb {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.scenarioTag {
+  display: inline-block;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 230, 138, 0.45);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Footer text */
+.tiny {
+  margin-top: 18px;
+  font-size: 12px;
+  color: rgba(16, 24, 38, 0.52);
+}
+
+/* Optional doodles row */
+.doodles {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+/* --- Fork choice cards with hover preview --- */
+.forkChoice {
+  position: relative;
+  text-align: left;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.86);
+  border-radius: 18px;
+  padding: 14px 14px 12px;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+
+.forkChoice:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0,0,0,0.12);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.18);
+}
+
+/* Hover preview: sample response */
+.hoverPreview {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%) translateY(8px);
+  width: min(360px, calc(100vw - 64px));
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 14px;
+  padding: 12px 14px;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease, transform 120ms ease;
+  z-index: 12;
+}
+
+.forkChoice:hover .hoverPreview {
+  opacity: 1;
+  transform: translateX(-50%) translateY(12px);
+}
+
+.hoverTitle {
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(16, 24, 38, 0.72);
+  margin-bottom: 6px;
+}
+
+.hoverText {
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(16, 24, 38, 0.92);
+}
+
+/* --- Detail view (after clicking an option) --- */
+.detailCard {
+  text-align: left;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.92);
+  border-radius: 20px;
+  box-shadow: 0 22px 70px rgba(0,0,0,0.18);
+  overflow: hidden;
+  margin-top: 14px;
+}
+
+.detailTop {
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.detailBody {
+  padding: 14px 16px 6px;
+}
+
+.detailBottom {
+  padding: 12px 16px 16px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  gap: 12px;
+}
+
+.detailBottom .button {
+  width: auto;
+  flex: 1;
+}
+
+/* Make header feel consistent and separated */
+.scenarioHeader {
+  margin-bottom: 10px;
+}
