@@ -1,0 +1,899 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+/* =========
+   Global Theme + Full-Screen Background + Consistent Layout
+   Paste entire file into src/App.css
+   ========= */
+
+:root {
+  --font-sans: "Manrope", "Avenir Next", "Segoe UI", Arial, sans-serif;
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+
+  --fs-body-lg: 16px;
+  --fs-body: 15px;
+  --fs-body-sm: 14px;
+  --fs-label: 13px;
+  --fs-caption: 12px;
+  --fs-heading: 17px;
+
+  --lh-body: 1.68;
+  --lh-ui: 1.55;
+  --lh-tight: 1.35;
+
+  /* Chalkboard (navy) */
+  --board-1: #071427;
+  --board-2: #0a1e3b;
+
+  /* Chalk */
+  --chalk-white: rgba(255, 255, 255, 0.92);
+  --chalk-yellow: rgba(255, 230, 138, 0.92);
+  --chalk-dust: rgba(255, 255, 255, 0.08);
+
+  /* Paper card */
+  --paper: rgba(255, 255, 255, 0.92);
+  --paper-border: rgba(0, 0, 0, 0.06);
+  --shadow: rgba(0, 0, 0, 0.28);
+
+  /* Text on paper */
+  --text-main: #101826;
+  --text-muted: #4f5b6a;
+
+  /* Sticky notes (pastels) */
+  --note-yellow: #ffe68a;
+  --note-mint: #b8f2e6;
+  --note-lilac: #d9c7ff;
+  --note-pink: #ffc1d6;
+
+  /* Primary button */
+  --primary: #0ea5e9;
+  --primary-dark: #0284c7;
+  --ring: rgba(14, 165, 233, 0.28);
+}
+
+/* --- Reliable full-screen base --- */
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-main);
+  display: block;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+/* --- Full-screen chalkboard background (applies to EVERY page) --- */
+.page {
+  min-height: 100vh; /* true full screen */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+
+  /* Layers:
+     1) pastel "sticky notes"
+     2) chalk smudges
+     3) chalk dust speckles
+     4) navy board gradient
+  */
+  background:
+    /* Sticky notes (pastel cards) */
+    linear-gradient(0deg, rgba(255, 230, 138, 0.18), rgba(255, 230, 138, 0.18)) 10% 18% / 160px 110px no-repeat,
+    linear-gradient(0deg, rgba(185, 242, 230, 0.16), rgba(185, 242, 230, 0.16)) 86% 22% / 170px 120px no-repeat,
+    linear-gradient(0deg, rgba(217, 199, 255, 0.16), rgba(217, 199, 255, 0.16)) 18% 84% / 180px 120px no-repeat,
+    linear-gradient(0deg, rgba(255, 193, 214, 0.14), rgba(255, 193, 214, 0.14)) 84% 78% / 150px 110px no-repeat,
+
+    /* Chalk smudges */
+    radial-gradient(900px 520px at 30% 30%, rgba(255, 255, 255, 0.10), transparent 62%),
+    radial-gradient(900px 520px at 70% 70%, rgba(255, 255, 255, 0.08), transparent 62%),
+
+    /* Chalk dust speckles */
+    repeating-radial-gradient(circle at 22% 28%,
+      var(--chalk-dust) 0 1px,
+      transparent 1px 12px
+    ),
+
+    /* Base board */
+    linear-gradient(180deg, var(--board-2), var(--board-1));
+}
+
+/* --- Consistent "paper on board" card --- */
+.card {
+  width: min(800px, 100%);
+  padding: 34px 32px;
+  border-radius: 26px;
+  background: var(--paper);
+  border: 1px solid var(--paper-border);
+  box-shadow: 0 26px 80px var(--shadow);
+  text-align: center;
+}
+
+/* --- Consistent "paper on board" card --- */
+.cardwide {
+  width: min(1040px, 100%);
+  padding: 34px 32px;
+  border-radius: 26px;
+  background: var(--paper);
+  border: 1px solid var(--paper-border);
+  box-shadow: 0 26px 80px var(--shadow);
+  text-align: center;
+}
+/* --- Badge, title, subtitle --- */
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(7, 20, 39, 0.90);
+  color: var(--chalk-white);
+  box-shadow: 0 10px 20px rgba(7, 20, 39, 0.20);
+  margin-bottom: 14px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4.2vw, 2.7rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+
+.scenarioOneTitle {
+  font-size: clamp(1.45rem, 2.9vw, 2.15rem);
+}
+
+@media (min-width: 900px) {
+  .scenarioOneTitle {
+    white-space: nowrap;
+  }
+}
+
+.subtitle {
+  margin: 0 0 18px;
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 72ch;
+  margin-inline: auto;
+}
+
+.section {
+  text-align: left;
+  margin: 12px 0 20px;
+}
+
+.sectionTitle {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(16, 24, 38, 0.62);
+  margin-bottom: 8px;
+  font-weight: 800;
+}
+
+.para,
+.sectionBody {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.72;
+  color: var(--text-main);
+}
+
+/* --- Content formatting (for your scenario intro text) --- */
+.content {
+  text-align: left;
+  margin-top: 18px;
+}
+
+.content p {
+  margin: 0 0 14px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-main);
+}
+
+.content em {
+  font-style: normal;
+  color: var(--text-muted);
+}
+
+.callout {
+  margin: 18px 0 22px;
+  padding: 14px 16px;
+  border-left: 4px solid var(--primary);
+  background: rgba(14, 165, 233, 0.08);
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-main);
+  text-align: left;
+}
+
+.escalationCallout {
+  border-left: 0;
+  border: 1px solid rgba(14, 165, 233, 0.32);
+  background:
+    linear-gradient(180deg, rgba(14, 165, 233, 0.12), rgba(14, 165, 233, 0.06));
+  box-shadow: 0 10px 24px rgba(2, 132, 199, 0.11);
+}
+
+.decisionLensCallout {
+  margin: 10px 0 6px;
+}
+
+.decisionLensCallout .sectionTitle {
+  color: rgba(14, 116, 144, 0.95);
+  margin-bottom: 6px;
+}
+
+.decisionLensCallout .bullets {
+  margin-top: 0;
+}
+
+.escalationEyebrow {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(7, 20, 39, 0.86);
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+/* --- Main buttons --- */
+.button {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 16px;
+  font-family: inherit;
+  border-radius: 16px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 14px 34px var(--ring);
+  transition: transform 120ms ease, background 120ms ease, filter 120ms ease;
+}
+
+.button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  filter: brightness(0.99);
+}
+
+.button:active {
+  transform: translateY(0px) scale(0.99);
+}
+
+.button.secondary {
+  background: transparent;
+  color: var(--primary-dark);
+  border: 2px solid var(--primary);
+  box-shadow: none;
+}
+
+.button.secondary:hover {
+  background: rgba(14, 165, 233, 0.08);
+}
+
+/* --- Chips (sticky note buttons) --- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px 0 24px;
+}
+
+/* Reset button defaults so no weird white blocks */
+.chip {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 8px 10px;
+  border-radius: 12px;
+
+  background: none;
+  background-clip: padding-box;
+
+  font: inherit;
+  color: inherit;
+  line-height: 1;
+
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+}
+
+.chip.yellow { background: rgba(255, 230, 138, 0.55); }
+.chip.mint   { background: rgba(185, 242, 230, 0.55); }
+.chip.lilac  { background: rgba(217, 199, 255, 0.55); }
+.chip.pink   { background: rgba(255, 193, 214, 0.55); }
+
+.chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  filter: brightness(0.98);
+}
+
+.chip:active {
+  transform: translateY(0px) scale(0.98);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.chip:focus-visible {
+  outline: 3px solid rgba(14, 165, 233, 0.28);
+  outline-offset: 2px;
+}
+
+/* --- Scenario cards (if you use them) --- */
+.grid {
+  display: grid;
+  gap: 14px;
+  margin: 18px 0 18px;
+}
+
+@media (min-width: 720px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.forkGrid {
+  display: grid;
+  gap: 14px;
+  margin: 6px 0 10px;
+}
+
+@media (min-width: 820px) {
+  .forkGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.scenarioCard {
+  text-align: left;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.85);
+  font-family: inherit;
+  border-radius: 18px;
+  padding: 14px 14px 12px;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+
+.scenarioCard:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0,0,0,0.12);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.10);
+}
+
+.scenarioTitle {
+  font-weight: 800;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.scenarioBlurb {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.scenarioTag {
+  display: inline-block;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 230, 138, 0.45);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* --- Module hub content --- */
+.moduleCard {
+  text-align: left;
+}
+
+.moduleCard .title,
+.moduleCard .subtitle {
+  text-align: center;
+}
+
+.moduleIntro {
+  border: 1px solid rgba(2, 132, 199, 0.24);
+  background: linear-gradient(180deg, rgba(14, 165, 233, 0.12), rgba(14, 165, 233, 0.06));
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin: 8px 0 16px;
+  font-size: 14px;
+  line-height: 1.58;
+  color: #0f172a;
+}
+
+.moduleStack {
+  display: grid;
+  gap: 14px;
+}
+
+.moduleItem {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+.modulePrompt {
+  margin: 0 0 12px;
+  font-size: 17px;
+  line-height: 1.45;
+  color: #0f172a;
+  font-weight: 800;
+}
+
+.moduleOptions {
+  display: grid;
+  gap: 10px;
+}
+
+@media (min-width: 860px) {
+  .moduleOptions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.moduleOption {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.97);
+  color: #0f172a;
+  text-align: left;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 10px 12px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: border-color 120ms ease, box-shadow 120ms ease, transform 120ms ease;
+}
+
+.moduleOption:hover,
+.moduleOption:focus-visible {
+  border-color: rgba(14, 165, 233, 0.42);
+  box-shadow: 0 8px 18px rgba(14, 165, 233, 0.12);
+  transform: translateY(-1px);
+}
+
+.moduleOption.isChosen {
+  border-color: rgba(2, 132, 199, 0.62);
+  background: rgba(240, 249, 255, 0.95);
+}
+
+.moduleOptionKey {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(2, 132, 199, 0.16);
+  color: #075985;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  flex: 0 0 auto;
+}
+
+.moduleFeedback {
+  margin-top: 12px;
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.moduleFeedback.good {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.moduleFeedback.warn {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.34);
+}
+
+.moduleFeedbackTitle {
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.moduleFeedbackBody,
+.moduleTakeaway,
+.moduleRisk {
+  margin: 0 0 7px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.moduleHint {
+  margin: 0 0 7px;
+  font-size: 13px;
+  line-height: 1.52;
+  color: rgba(15, 23, 42, 0.76);
+}
+
+.moduleHintTitle {
+  margin: 2px 0 4px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: rgba(15, 23, 42, 0.72);
+}
+
+.moduleTakeaway,
+.moduleRisk {
+  color: rgba(15, 23, 42, 0.9);
+}
+
+.moduleTakeaway:last-child,
+.moduleRisk:last-child {
+  margin-bottom: 0;
+}
+
+.definitionGrid {
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 980px) {
+  .definitionGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.definitionCard {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 18px;
+  padding: 14px 14px 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+.definitionTerm {
+  margin: 0 0 10px;
+  font-size: 18px;
+  line-height: 1.35;
+  color: #0f172a;
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+}
+
+.definitionBlock {
+  margin-bottom: 10px;
+}
+
+.definitionBlock p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.definitionLabel {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgba(15, 23, 42, 0.62);
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.definitionExample {
+  margin-top: 2px;
+  border-left: 3px solid rgba(2, 132, 199, 0.6);
+  background: rgba(14, 165, 233, 0.08);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #0f172a;
+}
+
+/* Footer text */
+.tiny {
+  margin-top: 18px;
+  font-size: 12px;
+  color: rgba(16, 24, 38, 0.52);
+}
+
+/* Optional doodles row */
+.doodles {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+/* --- Fork choice cards --- */
+.forkChoice {
+  text-align: left;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.9);
+  font-family: inherit;
+  border-radius: 18px;
+  padding: 14px 14px 14px;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.forkChoice:hover,
+.forkChoice:focus-visible,
+.forkChoice.isActive {
+  transform: translateY(-1px);
+  border-color: rgba(14, 165, 233, 0.45);
+  background: rgba(255,255,255,0.98);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.18);
+}
+
+.optionHeader {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.optionKey {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(14, 165, 233, 0.14);
+  color: #0369a1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.optionTitle {
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.previewPanel {
+  margin: 10px 0 18px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(14, 165, 233, 0.22);
+  border-radius: 14px;
+  padding: 12px 14px 13px;
+  box-shadow: 0 12px 24px rgba(2, 132, 199, 0.15);
+  min-height: 96px;
+}
+
+.previewLabel {
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(14, 116, 144, 0.9);
+  margin-bottom: 6px;
+}
+
+.previewHint {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(15, 23, 42, 0.72);
+  margin-bottom: 8px;
+}
+
+.previewText {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #0f172a;
+}
+
+/* --- Detail view (after clicking an option) --- */
+.detailCard {
+  text-align: left;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.92);
+  border-radius: 20px;
+  box-shadow: 0 22px 70px rgba(0,0,0,0.18);
+  overflow: hidden;
+  margin-top: 14px;
+}
+
+.detailTop {
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.modalTitle {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 17px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.detailBody {
+  padding: 14px 16px 6px;
+}
+
+.miniSection {
+  margin-bottom: 14px;
+}
+
+.reflectionBlock {
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  background: rgba(14, 165, 233, 0.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.reflectionPrompt {
+  margin-bottom: 8px;
+}
+
+.miniTitle {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgba(16, 24, 38, 0.65);
+  margin-bottom: 6px;
+  font-weight: 800;
+}
+
+.quote {
+  background: rgba(14, 165, 233, 0.08);
+  border-left: 3px solid var(--primary);
+  border-radius: 10px;
+  padding: 10px 12px;
+  line-height: 1.6;
+  color: #0f172a;
+}
+
+.bullets {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.bullets li {
+  margin: 0 0 7px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.detailBottom {
+  padding: 12px 16px 16px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.detailBottom .button {
+  width: auto;
+  flex: 1;
+  min-width: 220px;
+}
+
+.actionsRow {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.actionsRow .button {
+  width: auto;
+  flex: 1;
+  min-width: 220px;
+  max-width: 320px;
+  border-radius: 14px;
+}
+
+.actionsRow .button.secondary {
+  background: linear-gradient(180deg, rgba(14, 165, 233, 0.1), rgba(14, 165, 233, 0.05));
+  color: #075985;
+  border: 1px solid rgba(14, 165, 233, 0.35);
+  box-shadow: 0 8px 20px rgba(2, 132, 199, 0.12);
+}
+
+/* Make header feel consistent and separated */
+.scenarioHeader {
+  margin-bottom: 10px;
+}
+
+/* --- Typography Consistency Scale --- */
+.subtitle,
+.button {
+  font-size: var(--fs-body-lg);
+}
+
+.para,
+.sectionBody,
+.content p,
+.optionTitle {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.modulePrompt,
+.definitionTerm,
+.modalTitle {
+  font-size: var(--fs-heading);
+  line-height: var(--lh-tight);
+}
+
+.previewText,
+.previewHint,
+.quote,
+.moduleOption,
+.moduleFeedbackBody,
+.moduleTakeaway,
+.moduleRisk,
+.moduleHint,
+.definitionBlock p,
+.definitionExample,
+.scenarioBlurb,
+.reflectionPrompt,
+.bullets li {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-ui);
+}
+
+.sectionTitle,
+.miniTitle,
+.definitionLabel,
+.moduleFeedbackTitle,
+.moduleHintTitle,
+.previewLabel,
+.badge {
+  font-size: var(--fs-caption);
+}
+
+.scenarioTitle {
+  font-size: var(--fs-label);
+}
+
+.decisionPromptHint {
+  margin: 0 0 10px;
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-ui);
+  color: rgba(15, 23, 42, 0.78);
+}
