@@ -3,15 +3,15 @@ export const CONCEPT_CHECK_ITEMS = [
     id: "cc-privacy",
     question: "When should a grading challenge move to a private conversation?",
     options: [
-      { key: "A", text: "Always move private immediately with no explanation." },
-      { key: "B", text: "When the exchange gets personal or disruptive, while acknowledging the concern." },
+      { key: "B", text: "Always move private immediately with no explanation." },
+      { key: "A", text: "When the exchange gets personal or disruptive, while acknowledging the concern." },
       { key: "C", text: "Only after a formal complaint is submitted." },
       { key: "D", text: "Never; resolve every grading issue publicly in class." },
     ],
-    correct: "B",
+    correct: "A",
     feedbackByOption: {
-      A: "Immediate privacy can reduce tension, but skipping any public acknowledgement may feel dismissive to the student.",
-      B: "Strong move. You protect class flow and preserve student dignity while still validating the concern.",
+      B: "Immediate privacy can reduce tension, but skipping any public acknowledgement may feel dismissive to the student.",
+      A: "Strong move. You protect class flow and preserve student dignity while still validating the concern.",
       C: "Waiting for a formal complaint is too slow for most classroom conflicts and can increase frustration.",
       D: "Public resolution can work for rubric reminders, but personal grading disputes often escalate in front of peers.",
     },
@@ -64,19 +64,19 @@ export const CONCEPT_CHECK_ITEMS = [
     question: "When is documentation most important?",
     options: [
       { key: "A", text: "Only when a student is rude." },
-      { key: "B", text: "After repeated issues, policy disputes, or emotionally charged interactions." },
+      { key: "D", text: "When there are any issues that raise concerns, policy disputes, or emotionally charged interactions." },
       { key: "C", text: "After every student question in office hours." },
-      { key: "D", text: "Only at the end of the term." },
+      { key: "B", text: "Only at the end of the term." },
     ],
-    correct: "B",
+    correct: "D",
     feedbackByOption: {
       A: "Rudeness is one trigger, but documentation is also important for repeated policy or escalation issues.",
-      B: "Strong move. Documenting patterns and key moments supports fair follow-up.",
+      D: "Strong move. Documenting patterns and key moments supports fair follow-up.",
       C: "Documenting everything is usually unnecessary and unsustainable.",
-      D: "End-of-term notes are often too late to be useful for active issues.",
+      B: "End-of-term notes are often too late to be useful for active issues.",
     },
     feedback:
-      "Brief factual notes help with follow-up, continuity, and instructor alignment.",
+      "Brief factual notes help with follow-up, continuity, and instructor alignment. Email instructors to alert them that situations are occurring.",
     takeaway: "Document patterns and key decisions, not every minor exchange.",
   },
   {
@@ -92,7 +92,7 @@ export const CONCEPT_CHECK_ITEMS = [
     feedbackByOption: {
       A: "One clarifying question is normal and usually manageable without escalation.",
       B: "Strong move. Repeated unresolved disputes often need instructor alignment.",
-      C: "Feeling nervous is common; it alone is not escalation criteria.",
+      C: "Feeling nervous is common, the instructor should be notified of the situation and nervousness but escalation is not necessarily needed",
       D: "Office hours requests are routine and not a standalone escalation signal.",
     },
     feedback:
