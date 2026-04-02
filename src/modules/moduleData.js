@@ -77,8 +77,8 @@ export const CONCEPT_CHECK_ITEMS = [
       B: "End-of-term notes are often too late to be useful for active issues.",
     },
     feedback:
-      "Brief factual notes help with follow-up, continuity, and instructor alignment. Email instructors to alert them that situations are occurring.",
-    takeaway: "Document patterns and key decisions, not every minor exchange.",
+      "Brief factual notes help with follow-up, continuity, and instructor alignment.",
+    takeaway: "Email instructors to alert them that situations are occurring. Document patterns and key decisions, not every minor exchange.",
   },
   {
     id: "cc-escalate",
