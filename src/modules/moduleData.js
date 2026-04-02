@@ -3,8 +3,8 @@ export const CONCEPT_CHECK_ITEMS = [
     id: "cc-privacy",
     question: "When should a grading challenge move to a private conversation?",
     options: [
-      { key: "B", text: "Always move private immediately with no explanation." },
       { key: "A", text: "When the exchange gets personal or disruptive, while acknowledging the concern." },
+      { key: "B", text: "Always move private immediately with no explanation." },
       { key: "C", text: "Only after a formal complaint is submitted." },
       { key: "D", text: "Never; resolve every grading issue publicly in class." },
     ],
@@ -64,9 +64,10 @@ export const CONCEPT_CHECK_ITEMS = [
     question: "When is documentation most important?",
     options: [
       { key: "A", text: "Only when a student is rude." },
-      { key: "D", text: "When there are any issues that raise concerns, policy disputes, or emotionally charged interactions." },
       { key: "C", text: "After every student question in office hours." },
-      { key: "B", text: "Only at the end of the term." },
+      { key: "B", text: "Only at the end of the term." },      
+      { key: "D", text: "When there are any issues that raise concerns, policy disputes, or emotionally charged interactions." },
+
     ],
     correct: "D",
     feedbackByOption: {
