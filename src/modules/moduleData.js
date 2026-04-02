@@ -92,7 +92,7 @@ export const CONCEPT_CHECK_ITEMS = [
     feedbackByOption: {
       A: "One clarifying question is normal and usually manageable without escalation.",
       B: "Strong move. Repeated unresolved disputes often need instructor alignment.",
-      C: "Feeling nervous is common, the instructor should be notified of the situation and nervousness but escalation is not necessarily needed",
+      C: "Also correct, feeling nervous is common. The instructor should be notified of the situation and nervousness but escalation is not necessarily needed",
       D: "Office hours requests are routine and not a standalone escalation signal.",
     },
     feedback:
